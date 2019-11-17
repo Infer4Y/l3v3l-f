@@ -50,7 +50,7 @@ public class Vector3f {
 
         float dX = ((cosY*sinZ*eY) + (cosY*cosZ*eX)) - (sinY * eZ);
         float dY = ((sinX*cosY*eZ) + (sinX*sinY*sinZ*eY) + (sinX*sinY*cosZ*eX)) + ((cosX*cosZ*eY) - (cosX*sinZ*eX));
-        float dZ = ((cosX*cosY*eZ) + (cosX*sinY*sinZ*eY) + (cosX*sinY*cosZ*eX)) - ((-sinX*cosZ*eY) - (-sinX*sinZ*eX));
+        float dZ = ((cosX*cosY*eZ) + (cosX*sinY*sinZ*eY) + (cosX*sinY*cosZ*eX)) - ((sinX*cosZ*eY) - (sinX*sinZ*eX));
 
         float bX = (((eZ / dZ) * dX) - eX);
         float bY = (((eZ / dZ) * dY) - eY);

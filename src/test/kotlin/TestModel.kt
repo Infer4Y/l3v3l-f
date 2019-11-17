@@ -22,8 +22,7 @@ class TestModel : JFrame("Test Model") {
     fun draw() {
         var last = Vector3f(0f,0f,0f)
         if (bufferStrategy == null) createBufferStrategy(4)
-        var g = bufferStrategy.drawGraphics
-        if (g==null)return
+        var g = bufferStrategy.drawGraphics ?: return
         g.color = Color.WHITE
         g.fillRect(0,0,width, height)
         for (i in model.vertexes) {
