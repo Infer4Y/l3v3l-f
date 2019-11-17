@@ -9,8 +9,8 @@ import kotlin.concurrent.schedule
 import kotlin.math.ceil
 
 class TestModel : JFrame("Test Model") {
-    var model = ModelCube(2f,2f,2f, Vector3f(5f,3f,5f))
-    var camara = Vector3f(20f,30f,20f)
+    var model = ModelCube(2.toFloat(),2.toFloat(),2.toFloat(), Vector3f(5.toFloat(),3.toFloat(),5.toFloat()))
+    var camara = Vector3f(7.toFloat(),10.toFloat(),0.toFloat())
 
     init {
         size = Dimension(300,300)
@@ -32,10 +32,10 @@ class TestModel : JFrame("Test Model") {
             if (last != Vector2f(0f,0f)) {
                 g.color = Color.BLACK
                 g.drawLine(
-                    ((last.x.toDouble()) * 1).toInt(),
-                    ((last.y.toDouble()) * 1).toInt(),
-                    ((current.x.toDouble()) * 1).toInt(),
-                    ((current.y.toDouble()) * 1).toInt()
+                    ((last.x.toDouble()) * 10).toInt(),
+                    ((last.y.toDouble()) * 10).toInt(),
+                    ((current.x.toDouble()) * 10).toInt(),
+                    ((current.y.toDouble()) * 10).toInt()
                 )
             }
             last = current
@@ -50,16 +50,28 @@ class TestModel : JFrame("Test Model") {
 object Run{
     var testModel = TestModel()
     var timer = Timer()
+    var timer1 = Timer()
+    var fps = 0
 
     fun late(){
         timer.schedule(1000/60) {
             testModel.draw()
+            fps++
             late()
+        }
+    }
+
+    fun title(){
+        testModel.title = "Test Model | FPS: ${fps}"
+        fps = 0
+        timer1.schedule(1000) {
+            title()
         }
     }
 
     @JvmStatic
     fun main(args: Array<String>){
         late()
+        title()
     }
 }
