@@ -5,13 +5,17 @@ import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics2D
 import java.util.*
+import javax.swing.InputMap
+import javax.swing.JComponent
 import javax.swing.JFrame
+import javax.swing.KeyStroke
 import kotlin.concurrent.schedule
 import kotlin.math.ceil
 
 class TestModel : JFrame("Test Model") {
-    var model = ModelCube(2.toFloat(),2.toFloat(),2.toFloat(), Vector3f(5.toFloat(),3.toFloat(),5.toFloat()))
-    var camara = Vector3f(7.toFloat(),10.toFloat(),0.toFloat())
+    var model = ModelCube(4.toFloat(),4.toFloat(),4.toFloat())
+    var camara = Vector3f(4.toFloat(),4.toFloat(),4.toFloat())
+
 
     init {
         size = Dimension(300,300)
@@ -23,29 +27,30 @@ class TestModel : JFrame("Test Model") {
 
     fun draw() {
         var last = Vector2f(0f,0f)
+        var na = last
         var current: Vector2f
         if (bufferStrategy == null) createBufferStrategy(4)
         var g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
         g.color = Color.WHITE
         g.fillRect(0,0,width, height)
-        g.translate(700,300)
+        g.translate(100,100)
 
         for (i in model.vertexes) {
             current = i.toVector2F(camara)
-            if (last != Vector2f(0f,0f)) {
+            if (last != na) {
                 g.color = Color.BLACK
                 g.drawLine(
-                    ((last.x.toDouble()) * 10).toInt(),
-                    ((last.y.toDouble()) * 10).toInt(),
-                    ((current.x.toDouble()) * 10).toInt(),
-                    ((current.y.toDouble()) * 10).toInt()
+                    ((last.x.toDouble())).toInt()*10,
+                    ((last.y.toDouble())).toInt()*10,
+                    ((current.x.toDouble())).toInt()*10,
+                    ((current.y.toDouble())).toInt()*10
                 )
             }
             last = current
             g.color = Color.WHITE
         }
 
-        g.translate(-700,-300)
+        g.translate(-100,-100)
         g.dispose()
         bufferStrategy.show()
 
