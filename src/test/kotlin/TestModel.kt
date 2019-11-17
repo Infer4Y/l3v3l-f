@@ -1,4 +1,5 @@
 import inferno.l3v3l_f.client.models.ModelCube
+import inferno.l3v3l_f.common.utils.math.Vector2f
 import inferno.l3v3l_f.common.utils.math.Vector3f
 import java.awt.Color
 import java.awt.Dimension
@@ -20,20 +21,22 @@ class TestModel : JFrame("Test Model") {
     }
 
     fun draw() {
-        var last = Vector3f(0f,0f,0f)
+        var last = Vector2f(0f,0f)
+        var current = Vector2f(0f,0f)
         if (bufferStrategy == null) createBufferStrategy(4)
         var g = bufferStrategy.drawGraphics ?: return
         g.color = Color.WHITE
         g.fillRect(0,0,width, height)
         for (i in model.vertexes) {
+            current = i.toVector2F(camara)
             g.color = Color.BLACK
             g.drawLine(
-                (ceil(last.toVector2F(camara).x.toDouble()) * 25).toInt(),
-                (ceil(last.toVector2F(camara).y.toDouble()) * 25).toInt(),
-                (ceil(i.toVector2F(camara).x.toDouble()) * 25).toInt(),
-                (ceil(i.toVector2F(camara).y.toDouble()) * 25).toInt()
+                (ceil(last.x.toDouble()) * 25).toInt(),
+                (ceil(last.y.toDouble()) * 25).toInt(),
+                (ceil(current.x.toDouble()) * 25).toInt(),
+                (ceil(current.y.toDouble()) * 25).toInt()
             )
-            last = i
+            last = current
             g.color = Color.WHITE
         }
         g.dispose()
