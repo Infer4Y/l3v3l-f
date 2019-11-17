@@ -9,8 +9,8 @@ import kotlin.concurrent.schedule
 import kotlin.math.ceil
 
 class TestModel : JFrame("Test Model") {
-    var model = ModelCube(1f,1f,1f)
-    var camara = Vector3f(2f,2f,2f)
+    var model = ModelCube(2f,2f,2f, Vector3f(5f,3f,5f))
+    var camara = Vector3f(20f,30f,20f)
 
     init {
         size = Dimension(300,300)
@@ -29,18 +29,21 @@ class TestModel : JFrame("Test Model") {
         g.fillRect(0,0,width, height)
         for (i in model.vertexes) {
             current = i.toVector2F(camara)
-            g.color = Color.BLACK
-            g.drawLine(
-                (ceil(last.x.toDouble()) * 25).toInt(),
-                (ceil(last.y.toDouble()) * 25).toInt(),
-                (ceil(current.x.toDouble()) * 25).toInt(),
-                (ceil(current.y.toDouble()) * 25).toInt()
-            )
+            if (last != Vector2f(0f,0f)) {
+                g.color = Color.BLACK
+                g.drawLine(
+                    ((last.x.toDouble()) * 1).toInt(),
+                    ((last.y.toDouble()) * 1).toInt(),
+                    ((current.x.toDouble()) * 1).toInt(),
+                    ((current.y.toDouble()) * 1).toInt()
+                )
+            }
             last = current
             g.color = Color.WHITE
         }
         g.dispose()
         bufferStrategy.show()
+
     }
 }
 
