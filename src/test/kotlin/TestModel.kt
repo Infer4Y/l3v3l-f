@@ -3,6 +3,7 @@ import inferno.l3v3l_f.common.utils.math.Vector2f
 import inferno.l3v3l_f.common.utils.math.Vector3f
 import java.awt.Color
 import java.awt.Dimension
+import java.awt.Graphics2D
 import java.util.*
 import javax.swing.JFrame
 import kotlin.concurrent.schedule
@@ -22,11 +23,13 @@ class TestModel : JFrame("Test Model") {
 
     fun draw() {
         var last = Vector2f(0f,0f)
-        var current = Vector2f(0f,0f)
+        var current: Vector2f
         if (bufferStrategy == null) createBufferStrategy(4)
-        var g = bufferStrategy.drawGraphics ?: return
+        var g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
         g.color = Color.WHITE
         g.fillRect(0,0,width, height)
+        g.translate(700,300)
+
         for (i in model.vertexes) {
             current = i.toVector2F(camara)
             if (last != Vector2f(0f,0f)) {
@@ -41,6 +44,8 @@ class TestModel : JFrame("Test Model") {
             last = current
             g.color = Color.WHITE
         }
+
+        g.translate(-700,-300)
         g.dispose()
         bufferStrategy.show()
 
