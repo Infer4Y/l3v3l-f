@@ -14,7 +14,7 @@ import kotlin.math.ceil
 
 class TestModel : JFrame("Test Model") {
     var model = ModelCube(4.toFloat(),4.toFloat(),4.toFloat())
-    var camara = Vector3f(4.toFloat(),4.toFloat(),4.toFloat())
+    var camara = Vector3f(4.toFloat(),1.toFloat(),1.toFloat())
 
 
     init {
@@ -28,29 +28,39 @@ class TestModel : JFrame("Test Model") {
     fun draw() {
         var last = Vector2f(0f,0f)
         var na = last
+        var x = 0
         var current: Vector2f
         if (bufferStrategy == null) createBufferStrategy(4)
         var g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
         g.color = Color.WHITE
         g.fillRect(0,0,width, height)
-        g.translate(100,100)
+        g.translate(800,800)
 
         for (i in model.vertexes) {
+
             current = i.toVector2F(camara)
+
+            if (x == 5) {x =0 ; last = na}
+
             if (last != na) {
                 g.color = Color.BLACK
+
                 g.drawLine(
-                    ((last.x.toDouble())).toInt()*10,
-                    ((last.y.toDouble())).toInt()*10,
-                    ((current.x.toDouble())).toInt()*10,
-                    ((current.y.toDouble())).toInt()*10
+                    ((last.x.toDouble())).toInt()*5,
+                    ((last.y.toDouble())).toInt()*5,
+                    ((current.x.toDouble())).toInt()*5,
+                    ((current.y.toDouble())).toInt()*5
                 )
             }
+
             last = current
+
+            x++
+
             g.color = Color.WHITE
         }
 
-        g.translate(-100,-100)
+        g.translate(-800,-800)
         g.dispose()
         bufferStrategy.show()
 
