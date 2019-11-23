@@ -55,7 +55,7 @@ public class Vector3f {
         float bX = (((eZ / dZ) * dX) - eX);
         float bY = (((eZ / dZ) * dY) - eY);
 
-        System.out.println(bX + " " + bY);
+        System.out.println(bX + " " + bY); // Comment for system improvements, but not allot better.
 
         return new Vector2f(bX, bY);
     }

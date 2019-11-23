@@ -35,7 +35,7 @@ class TestModel : JFrame("Test Model") {
         val g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
         g.color = Color.BLACK
         g.fillRect(0,0,width, height)
-        g.translate(170,660)
+        g.translate(170,70)
 
         for (i in model.vertexes) {
             current = i.toVector2F(camara)
@@ -58,10 +58,10 @@ class TestModel : JFrame("Test Model") {
             g.color = Color.BLACK
         }
 
-        g.translate(0,-800)
+        //g.translate(0,-800)
         g.dispose()
         bufferStrategy.show()
-        camara.add(Vector3f(0.006f,0.006f,-0.006f))
+        camara.add(Vector3f(0.00f,-0.006f,-0.0f))
     }
 }
 
