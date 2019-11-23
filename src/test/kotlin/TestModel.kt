@@ -34,9 +34,9 @@ class TestModel : JFrame("Test Model") {
         var current: Vector2f
         if (bufferStrategy == null) createBufferStrategy(4)
         var g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
-        g.color = Color.WHITE
+        g.color = Color.BLACK
         g.fillRect(0,0,width, height)
-        //g.translate(800,800)
+        g.translate(800,800)
 
         for (i in model.vertexes) {
             current = i.toVector2F(camara)
@@ -44,7 +44,7 @@ class TestModel : JFrame("Test Model") {
             if (x == 5) {x =0 ; last = na}
 
             if (last != na) {
-                g.color = Color.BLACK
+                g.color = Color.WHITE
 
                 g.drawLine(
                     ((last.x.toDouble())).toInt()*5,
@@ -56,7 +56,7 @@ class TestModel : JFrame("Test Model") {
 
             last = current
             x++
-            g.color = Color.WHITE
+            g.color = Color.BLACK
         }
 
         last = na
@@ -67,7 +67,7 @@ class TestModel : JFrame("Test Model") {
             if (x == 5) {x =0 ; last = na}
 
             if (last != na) {
-                g.color = Color.BLACK
+                g.color = Color.WHITE
 
                 g.drawLine(
                     ((last.x.toDouble())).toInt()*5,
@@ -79,7 +79,7 @@ class TestModel : JFrame("Test Model") {
 
             last = current
             x++
-            g.color = Color.WHITE
+            g.color = Color.BLACK
         }
 
         last = na
@@ -90,7 +90,7 @@ class TestModel : JFrame("Test Model") {
             if (x == 5) {x =0 ; last = na}
 
             if (last != na) {
-                g.color = Color.BLACK
+                g.color = Color.WHITE
 
                 g.drawLine(
                     ((last.x.toDouble())).toInt()*5,
@@ -102,10 +102,10 @@ class TestModel : JFrame("Test Model") {
 
             last = current
             x++
-            g.color = Color.WHITE
+            g.color = Color.BLACK
         }
 
-        //g.translate(-800,-800)
+        g.translate(-800,-800)
         g.dispose()
         bufferStrategy.show()
 

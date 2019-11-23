@@ -36,7 +36,7 @@ public class Vector3f {
     }
 
     public Vector2f toVector2F(Vector3f vector3f){
-        /*float eX = this.x - vector3f.x;
+        float eX = this.x - vector3f.x;
         float eY = this.y - vector3f.y;
         float eZ = this.z - vector3f.z;
 
@@ -54,11 +54,6 @@ public class Vector3f {
 
         float bX = (((eZ / dZ) * dX) - eX);
         float bY = (((eZ / dZ) * dY) - eY);
-
-        System.out.println(bX + " " + bY);*/
-
-        float bX = x/ z;
-        float bY = y / z;
 
         System.out.println(bX + " " + bY);
 
