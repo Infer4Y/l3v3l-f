@@ -61,7 +61,7 @@ class TestModel : JFrame("Test Model") {
         g.translate(0,-800)
         g.dispose()
         bufferStrategy.show()
-        camara.add(Vector3f(0.006f,0.006f,0f))
+        camara.add(Vector3f(0.006f,0.006f,-0.006f))
     }
 }
 
@@ -89,7 +89,7 @@ object Run{
 
     @JvmStatic
     fun main(args: Array<String>){
-        late()
+        timer.schedule(5000) {late()}
         title()
     }
 }
