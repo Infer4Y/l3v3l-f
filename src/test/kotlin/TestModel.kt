@@ -13,10 +13,8 @@ import kotlin.concurrent.schedule
 import kotlin.math.ceil
 
 class TestModel : JFrame("Test Model") {
-    var model = ModelCube(0.toFloat(),11.toFloat(),5.toFloat(), 50f)
-    var model1 = ModelCube(50.toFloat(),35.toFloat(),7.toFloat(),30f)
-    var model2 = ModelCube(90.toFloat(),32.toFloat(),3.toFloat(),10f)
-    var camara = Vector3f(4.toFloat(),4.toFloat(),4.toFloat())
+    var model = ModelCube(0.toFloat(),0.toFloat(),5.toFloat(), 50f)
+    var camara = Vector3f((-25).toFloat(), (-25).toFloat(),100.toFloat())
 
 
     init {
@@ -29,11 +27,11 @@ class TestModel : JFrame("Test Model") {
 
     fun draw() {
         var last = Vector2f(0f,0f)
-        var na = last
+        val na = last
         var x = 0
         var current: Vector2f
         if (bufferStrategy == null) createBufferStrategy(4)
-        var g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
+        val g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
         g.color = Color.BLACK
         g.fillRect(0,0,width, height)
         g.translate(800,800)
@@ -47,56 +45,10 @@ class TestModel : JFrame("Test Model") {
                 g.color = Color.WHITE
 
                 g.drawLine(
-                    ((last.x.toDouble())).toInt()*5,
-                    ((last.y.toDouble())).toInt()*5,
-                    ((current.x.toDouble())).toInt()*5,
-                    ((current.y.toDouble())).toInt()*5
-                )
-            }
-
-            last = current
-            x++
-            g.color = Color.BLACK
-        }
-
-        last = na
-
-        for (i in model1.vertexes) {
-            current = i.toVector2F(camara)
-
-            if (x == 5) {x =0 ; last = na}
-
-            if (last != na) {
-                g.color = Color.WHITE
-
-                g.drawLine(
-                    ((last.x.toDouble())).toInt()*5,
-                    ((last.y.toDouble())).toInt()*5,
-                    ((current.x.toDouble())).toInt()*5,
-                    ((current.y.toDouble())).toInt()*5
-                )
-            }
-
-            last = current
-            x++
-            g.color = Color.BLACK
-        }
-
-        last = na
-
-        for (i in model2.vertexes) {
-            current = i.toVector2F(camara)
-
-            if (x == 5) {x =0 ; last = na}
-
-            if (last != na) {
-                g.color = Color.WHITE
-
-                g.drawLine(
-                    ((last.x.toDouble())).toInt()*5,
-                    ((last.y.toDouble())).toInt()*5,
-                    ((current.x.toDouble())).toInt()*5,
-                    ((current.y.toDouble())).toInt()*5
+                    ((last.x.toDouble())).toInt(),
+                    ((last.y.toDouble())).toInt(),
+                    ((current.x.toDouble())).toInt(),
+                    ((current.y.toDouble())).toInt()
                 )
             }
 
