@@ -11,10 +11,11 @@ import javax.swing.JFrame
 import javax.swing.KeyStroke
 import kotlin.concurrent.schedule
 import kotlin.math.ceil
+import kotlin.math.floor
 
 class TestModel : JFrame("Test Model") {
-    var model = ModelCube(0.toFloat(),0.toFloat(),5.toFloat(), 50f)
-    var camara = Vector3f((-25).toFloat(), (-25).toFloat(),100.toFloat())
+    var model = ModelCube(0.toFloat(),0.toFloat(),0.toFloat(), 50f)
+    var camara = Vector3f((50).toFloat(), (50).toFloat(),(-250).toFloat())
 
 
     init {
@@ -34,7 +35,7 @@ class TestModel : JFrame("Test Model") {
         val g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
         g.color = Color.BLACK
         g.fillRect(0,0,width, height)
-        g.translate(800,800)
+        g.translate(170,660)
 
         for (i in model.vertexes) {
             current = i.toVector2F(camara)
@@ -45,10 +46,10 @@ class TestModel : JFrame("Test Model") {
                 g.color = Color.WHITE
 
                 g.drawLine(
-                    ((last.x.toDouble())).toInt(),
-                    ((last.y.toDouble())).toInt(),
-                    ((current.x.toDouble())).toInt(),
-                    ((current.y.toDouble())).toInt()
+                    (ceil(last.x)).toInt(),
+                    (floor(last.y)).toInt(),
+                    (ceil(current.x)).toInt(),
+                    (floor(current.y)).toInt()
                 )
             }
 
@@ -57,10 +58,10 @@ class TestModel : JFrame("Test Model") {
             g.color = Color.BLACK
         }
 
-        g.translate(-800,-800)
+        g.translate(0,-800)
         g.dispose()
         bufferStrategy.show()
-
+        camara.add(Vector3f(0.006f,0.006f,0f))
     }
 }
 
