@@ -10,6 +10,12 @@ import javax.swing.JFrame
 import javax.swing.text.Keymap
 import kotlin.concurrent.schedule
 import kotlin.math.*
+import javax.swing.SwingConstants
+import javax.swing.JSlider
+import java.awt.AWTEventMulticaster.getListeners
+import java.awt.AWTEventMulticaster.getListeners
+import java.awt.BorderLayout
+
 
 class TestModel : JFrame("Test Model") {
 
@@ -20,10 +26,10 @@ class TestModel : JFrame("Test Model") {
 
     var shapes : Array<Model> = arrayOf(model, model1, model2, model3)
 
-    var west = 100.toFloat()
-    var east = 0.toFloat()
-    var north = 0.toFloat()
-    var south = 100.toFloat()
+    var north = false
+    var east = false
+    var south = false
+    var west = false
 
     var r = 180.toFloat()
     var q = 90.toFloat()
@@ -42,7 +48,7 @@ class TestModel : JFrame("Test Model") {
         ))
 
     var camera = camerax.multiply(cameray)
-    var transformLoc = Vector3f(0.toFloat(),0.toFloat(),100.toFloat())
+    var transformLoc = Vector3f(10.toFloat(),0.toFloat(),10.toFloat())
 
     init {
 
@@ -53,8 +59,35 @@ class TestModel : JFrame("Test Model") {
         setLocationRelativeTo(null)
     }
 
+    fun cameraUpdate(){
+        camerax = Matrix3f(
+            floatArrayOf(
+                cos(r), 0.toFloat(), -sin(r),
+                0.toFloat(), 1.toFloat(), 0.toFloat(),
+                sin(r), 0.toFloat(), cos(r)
+            ))
+        cameray = Matrix3f(
+            floatArrayOf(
+                1.toFloat(), 0.toFloat(), 0.toFloat(),
+                0.toFloat(), cos(q), sin(q),
+                0.toFloat(), -sin(q), cos(q)
+            ))
+        camera = camerax.multiply(cameray)
+    }
+
     fun move(){
-        if (west <= 0);
+        when (10.000.toFloat()){
+            transformLoc.x -> {east=false; west=true}
+            -transformLoc.x -> {east=true; west=false}
+            transformLoc.z -> {north=false; south=true}
+            -transformLoc.z -> {north=true; south=false}
+        }
+        when (true){
+            north -> transformLoc.add(0f,0f,0.5f)
+            east -> transformLoc.add(0.5f,0f,0f)
+            south -> transformLoc.add(0f,0f,-0.5f)
+            west -> transformLoc.add(-0.5f,0f,0f)
+        }
     }
 
     fun draw() {
@@ -93,8 +126,8 @@ class TestModel : JFrame("Test Model") {
                 g.color = Color.BLACK
             }
         }
-
-        //g.translate(0,-800)
+        cameraUpdate()
+        move()
         g.dispose()
         bufferStrategy.show()
     }
@@ -102,6 +135,7 @@ class TestModel : JFrame("Test Model") {
 
 object Run{
     var testModel = TestModel()
+
     var timer = Timer()
     var timer1 = Timer()
     var fps = 0
