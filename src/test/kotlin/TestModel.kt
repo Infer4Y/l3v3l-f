@@ -15,9 +15,12 @@ import javax.swing.JSlider
 import java.awt.AWTEventMulticaster.getListeners
 import java.awt.AWTEventMulticaster.getListeners
 import java.awt.BorderLayout
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
+import javax.swing.KeyStroke
 
 
-class TestModel : JFrame("Test Model") {
+class TestModel : JFrame("Test Model"), KeyListener{
 
     var model = ModelCube(0.toFloat(),0.toFloat(),0.toFloat(), 50f)
     var model1 = ModelCube(50.toFloat(),0.toFloat(),0.toFloat(), 50f)
@@ -51,12 +54,12 @@ class TestModel : JFrame("Test Model") {
     var transformLoc = Vector3f(10.toFloat(),0.toFloat(),10.toFloat())
 
     init {
-
         size = Dimension(300,300)
         isResizable = true
         isVisible = true
         defaultCloseOperation = 3
         setLocationRelativeTo(null)
+        addKeyListener(this)
     }
 
     fun cameraUpdate(){
@@ -76,12 +79,6 @@ class TestModel : JFrame("Test Model") {
     }
 
     fun move(){
-        when (10.000.toFloat()){
-            transformLoc.x -> {east=false; west=true}
-            -transformLoc.x -> {east=true; west=false}
-            transformLoc.z -> {north=false; south=true}
-            -transformLoc.z -> {north=true; south=false}
-        }
         when (true){
             north -> transformLoc.add(0f,0f,0.5f)
             east -> transformLoc.add(0.5f,0f,0f)
@@ -93,7 +90,6 @@ class TestModel : JFrame("Test Model") {
     fun draw() {
         var last = Vector3f(0.toFloat(),0.toFloat(),0.toFloat())
         val na = last
-        var x = 0
         var current: Vector3f
         if (bufferStrategy == null) createBufferStrategy(4)
         val g : Graphics2D = bufferStrategy.drawGraphics as Graphics2D? ?: return
@@ -103,11 +99,8 @@ class TestModel : JFrame("Test Model") {
 
         for (l in shapes) {
             for (i in l.vertexes) {
-                current = camera.transform(i).add(transformLoc)
-
-                if (x == 5) {
-                    x = 0; last = na
-                }
+                var x = Vector3f(i.x, i.y, i.z)
+                current = camera.transform(x.add(transformLoc))
 
                 if (last != na) {
                     g.color = Color.WHITE
@@ -122,14 +115,35 @@ class TestModel : JFrame("Test Model") {
 
 
                 last = current
-                x++
                 g.color = Color.BLACK
             }
+            last = na
         }
         cameraUpdate()
         move()
         g.dispose()
         bufferStrategy.show()
+    }
+
+    override fun keyTyped(e: KeyEvent?) {
+    }
+
+    override fun keyPressed(e: KeyEvent?) {
+        when (e?.keyCode){
+            KeyEvent.VK_W -> {north=true; south=false}
+            KeyEvent.VK_A -> {east=false; west=true}
+            KeyEvent.VK_S -> {north=false; south=true}
+            KeyEvent.VK_D -> {east=true; west=false}
+        }
+    }
+
+    override fun keyReleased(e: KeyEvent?) {
+        when (e?.keyCode){
+            KeyEvent.VK_W -> {north=false}
+            KeyEvent.VK_A -> {west=false}
+            KeyEvent.VK_S -> {south=false}
+            KeyEvent.VK_D -> {east=false}
+        }
     }
 }
 
