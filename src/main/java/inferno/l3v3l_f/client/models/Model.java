@@ -1,17 +1,17 @@
 package inferno.l3v3l_f.client.models;
 
-import inferno.l3v3l_f.common.utils.math.Vector3f;
+import inferno.l3v3l_f.client.models.shapes.Shape;
 
 public class Model {
-    protected Vector3f[] vertexes;
+    protected Shape[] shapes;
 
-    public Model(Vector3f[] vertexes) {
-        this.vertexes = vertexes;
+    public Model(Shape[] shapes) {
+        this.shapes = shapes;
     }
 
     public Model(){}
 
-    public Vector3f[] getVertexes() {
-        return vertexes;
+    public Shape[] getShapes() {
+        return shapes;
     }
 }

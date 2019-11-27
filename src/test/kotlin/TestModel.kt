@@ -7,17 +7,10 @@ import java.awt.Dimension
 import java.awt.Graphics2D
 import java.util.*
 import javax.swing.JFrame
-import javax.swing.text.Keymap
 import kotlin.concurrent.schedule
 import kotlin.math.*
-import javax.swing.SwingConstants
-import javax.swing.JSlider
-import java.awt.AWTEventMulticaster.getListeners
-import java.awt.AWTEventMulticaster.getListeners
-import java.awt.BorderLayout
 import java.awt.event.KeyEvent
 import java.awt.event.KeyListener
-import javax.swing.KeyStroke
 
 
 class TestModel : JFrame("Test Model"), KeyListener{
@@ -27,7 +20,9 @@ class TestModel : JFrame("Test Model"), KeyListener{
     var model2 = ModelCube(0.toFloat(),50.toFloat(),0.toFloat(), 50f)
     var model3 = ModelCube(0.toFloat(),0.toFloat(),50.toFloat(), 50f)
 
-    var shapes : Array<Model> = arrayOf(model, model1, model2, model3)
+    var models : Array<Model> = arrayOf(model
+        //, model1, model2, model3
+    )
 
     var north = false
     var east = false
@@ -35,7 +30,7 @@ class TestModel : JFrame("Test Model"), KeyListener{
     var west = false
 
     var r = 180.toFloat()
-    var q = 90.toFloat()
+    var q = 10.toFloat()
 
     var camerax = Matrix3f(
         floatArrayOf(
@@ -63,6 +58,10 @@ class TestModel : JFrame("Test Model"), KeyListener{
     }
 
     fun cameraUpdate(){
+        if (r >= 360f) r =0f
+        if (q >= 90f) q = -90f
+
+
         camerax = Matrix3f(
             floatArrayOf(
                 cos(r), 0.toFloat(), -sin(r),
@@ -76,6 +75,8 @@ class TestModel : JFrame("Test Model"), KeyListener{
                 0.toFloat(), -sin(q), cos(q)
             ))
         camera = camerax.multiply(cameray)
+        r+= 0.005f;
+        q+= 0.05f;
     }
 
     fun move(){
@@ -89,6 +90,7 @@ class TestModel : JFrame("Test Model"), KeyListener{
 
     fun draw() {
         var last = Vector3f(0.toFloat(),0.toFloat(),0.toFloat())
+        var first = Vector3f(0.toFloat(),0.toFloat(),0.toFloat())
         val na = last
         var current: Vector3f
         if (bufferStrategy == null) createBufferStrategy(4)
@@ -97,27 +99,39 @@ class TestModel : JFrame("Test Model"), KeyListener{
         g.fillRect(0,0,width, height)
         g.translate(width/2,height/2)
 
-        for (l in shapes) {
-            for (i in l.vertexes) {
-                var x = Vector3f(i.x, i.y, i.z)
-                current = camera.transform(x.add(transformLoc))
+        for (l in models) {
+            for (f in l.shapes) {
+                for (i in f.vertexes) {
+                    val x = Vector3f(i.x, i.y, i.z)
+                    current = camera.transform(x.add(transformLoc))
 
-                if (last != na) {
-                    g.color = Color.WHITE
+                    if (last != na) {
+                        g.color = Color.WHITE
 
-                    g.drawLine(
-                        (floor(last.x)).toInt(),
-                        (floor(last.y)).toInt(),
-                        (floor(current.x)).toInt(),
-                        (floor(current.y)).toInt()
-                    )
+                        g.drawLine(
+                            (floor(last.x)).toInt(),
+                            (floor(last.y)).toInt(),
+                            (floor(current.x)).toInt(),
+                            (floor(current.y)).toInt()
+                        )
+                    } else {
+                        first = current
+                    }
+
+
+                    last = current
+                    g.color = Color.BLACK
                 }
-
-
-                last = current
+                g.color = Color.WHITE
+                g.drawLine(
+                    (floor(last.x)).toInt(),
+                    (floor(last.y)).toInt(),
+                    (floor(first.x)).toInt(),
+                    (floor(first.y)).toInt()
+                )
                 g.color = Color.BLACK
+                last = na
             }
-            last = na
         }
         cameraUpdate()
         move()
