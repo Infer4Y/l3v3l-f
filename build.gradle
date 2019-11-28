@@ -11,6 +11,10 @@ jar {
     manifest {
         attributes 'Main-Class': 'inferno.l3v3l_f.client.Run'
     }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 repositories {

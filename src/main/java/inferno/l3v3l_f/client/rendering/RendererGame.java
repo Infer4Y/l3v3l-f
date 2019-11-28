@@ -38,7 +38,7 @@ public class RendererGame {
                 for (int k = 0; k < 16; k++) {
                     for (int l = 0; l < 16; l++) {
                         for (int m = 0; m < 16; m++) {
-                            cube = new ModelCube((float)(-128)+(k+(128*i)), (-64)+l, (-128)+(k+(128*j)), 8f);
+                            cube = new ModelCube((float)(-256)+((m*16)+(256*i)), (-128)+(l*16), (-256)+((k*16)+(256*j)), 16f);
                             for (int f = 0; f < cube.getShapes().length; f++){
                                 for (int g= 0; g < cube.getShapes()[f].getVertexes().length; g++){
                                     if (first == na) {
@@ -65,4 +65,7 @@ public class RendererGame {
         camera.cameraUpdate();
     }
 
+    public void moveCamera(Vector3f vector3f){
+        camera.setPos(camera.getPos().add(vector3f));
+    }
 }

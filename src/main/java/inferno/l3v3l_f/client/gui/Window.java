@@ -10,17 +10,23 @@ import java.awt.*;
 public class Window extends JFrame {
     private RendererGame game;
     private ClientWorld world;
+    private WindowHelper windowHelper;
 
     public Window(String title){
         super(title);
         setSize(400,400);
         setVisible(true);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(3);
         world = ClientWorld.genWorld();
         game = new RendererGame(world);
+        windowHelper = new WindowHelper();
+        addKeyListener(windowHelper);
     }
 
-
+    public void update(){
+        game.moveCamera(windowHelper.move());
+    }
 
     public void draw() {
         Graphics2D graphics2D;
