@@ -7,13 +7,18 @@ group 'inferno'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+jar {
+    manifest {
+        attributes 'Main-Class': 'inferno.l3v3l_f.client.Run'
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
