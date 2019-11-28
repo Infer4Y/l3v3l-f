@@ -15,14 +15,12 @@ import java.awt.event.KeyListener
 
 class TestModel : JFrame("Test Model"), KeyListener{
 
-    var model = ModelCube(0.toFloat(),0.toFloat(),0.toFloat(), 50f)
-    var model1 = ModelCube(50.toFloat(),0.toFloat(),0.toFloat(), 50f)
-    var model2 = ModelCube(0.toFloat(),50.toFloat(),0.toFloat(), 50f)
-    var model3 = ModelCube(0.toFloat(),0.toFloat(),50.toFloat(), 50f)
+    var model = ModelCube((-50).toFloat(),(-50).toFloat(),(-50).toFloat(), 50f)
+    var model1 = ModelCube((0).toFloat(),(-50).toFloat(),(-50).toFloat(), 50f)
+    var model2 = ModelCube((-50).toFloat(), (-50).toFloat(),0.toFloat(), 50f)
+    var model3 = ModelCube(0.toFloat(),0.toFloat(),0.toFloat(), 50f)
 
-    var models : Array<Model> = arrayOf(model
-        //, model1, model2, model3
-    )
+    var models : Array<Model> = arrayOf(model, model1, model2, model3)
 
     var north = false
     var east = false
