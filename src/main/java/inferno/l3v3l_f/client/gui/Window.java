@@ -3,6 +3,7 @@ package inferno.l3v3l_f.client.gui;
 import inferno.l3v3l_f.client.rendering.Camera;
 import inferno.l3v3l_f.client.rendering.RendererGame;
 import inferno.l3v3l_f.client.world.ClientWorld;
+import inferno.l3v3l_f.common.utils.math.Vector2f;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,9 @@ public class Window extends JFrame {
 
     public void update(){
         game.moveCamera(windowHelper.move());
+        Vector2f rot = windowHelper.rotate(game.getCamera().getRotationX(), game.getCamera().getRotationY());
+        game.getCamera().setRotationX(rot.getX());
+        game.getCamera().setRotationY(rot.getY());
     }
 
     public void draw() {
@@ -42,5 +46,9 @@ public class Window extends JFrame {
         graphics2D.dispose();
 
         getBufferStrategy().show();
+    }
+
+    public RendererGame getRenderer(){
+        return game;
     }
 }

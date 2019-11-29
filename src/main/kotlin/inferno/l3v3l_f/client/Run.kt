@@ -32,7 +32,7 @@ object Run {
     }
 
     fun title(){
-        window.title = "Game | FPS: $fps | Ticks : $ticks"
+        window.title = "Game | FPS: $fps | Ticks : $ticks | RotX : ${window.renderer.camera.rotationX}"
         fps = 0
         ticks = 0
         timer1.schedule(1000) {

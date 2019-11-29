@@ -14,7 +14,7 @@ public class RendererGame {
 
 
     public RendererGame(ClientWorld world) {
-        camera = new Camera(180f, 45f, new Vector3f(-128,-128,-128));
+        camera = new Camera(270f, -45f, new Vector3f(-128,-128,-128));
         this.world = world;
     }
 
@@ -45,11 +45,14 @@ public class RendererGame {
                                         current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
                                         last = current;
                                         first = current;
-                                    } else if(camera.getPos().getX() > cube.getShapes()[f].getVertexes()[g].getX()) {
-                                        graphics2D.setColor(Color.white);
+                                    } else if((m == 15 || l == 15 || k == 15)|| (m == 0 || l == 0 || k == 0))  {
+                                        graphics2D.setColor(Color.GREEN);
                                         current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
-                                        graphics2D.drawLine(((int) last.getX()), (int) last.getY(), (int) current.getX(), (int) current.getY());
-                                        graphics2D.setColor(Color.BLACK);
+                                        if ((current.getX() <= ((Run.window.getWidth()/2f)+ 20f) && current.getX() >= (-(Run.window.getWidth()/2f)-20f)) &&
+                                                (current.getY() <= ((Run.window.getHeight()/2f)+ 20f) && current.getY() >= (-(Run.window.getHeight()/2f)-20f))) {
+                                            graphics2D.drawLine(((int) last.getX()), (int) last.getY(), (int) current.getX(), (int) current.getY());
+                                            graphics2D.setColor(Color.BLACK);
+                                        }
                                         last = current;
                                     }
                                 }
@@ -61,10 +64,15 @@ public class RendererGame {
                 }
             }
         }
+
         camera.cameraUpdate();
     }
 
     public void moveCamera(Vector3f vector3f){
         camera.setPos(camera.getPos().add(vector3f));
+    }
+
+    public Camera getCamera() {
+        return camera;
     }
 }

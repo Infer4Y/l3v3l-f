@@ -8,6 +8,17 @@ public class Vector2f {
         this.y= y;
     }
 
+    public Vector2f add(Vector2f vector2f){
+        this.x+= vector2f.getX();
+        this.y+= vector2f.getY();
+        return this;
+    }
+    public Vector2f add(float x, float y){
+        this.x+= x;
+        this.y+= y;
+        return this;
+    }
+
     public float getX() {
         return x;
     }
