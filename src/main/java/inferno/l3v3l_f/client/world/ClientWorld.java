@@ -1,6 +1,7 @@
 package inferno.l3v3l_f.client.world;
 
 import inferno.l3v3l_f.common.Game;
+import inferno.l3v3l_f.common.utils.math.Vector3f;
 import inferno.l3v3l_f.common.world.World;
 import inferno.l3v3l_f.common.world.chunks.Chunk;
 
@@ -29,5 +30,13 @@ public class ClientWorld extends World {
         }
 
         return temp;
+    }
+
+    public boolean isVisible(Vector3f camera, Vector3f block){
+         if (camera.getX() > block.getX() || camera.getY() > block.getY() || camera.getZ() > block.getZ()){
+             return true;
+         }
+         System.out.println(block.getX()+","+block.getY()+","+ block.getZ() + " " +camera.getX()+","+camera.getY()+","+camera.getZ());
+        return false;
     }
 }

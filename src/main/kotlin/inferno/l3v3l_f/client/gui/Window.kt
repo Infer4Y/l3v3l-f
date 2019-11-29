@@ -12,12 +12,12 @@ class WindowHelper : KeyListener {
 
     fun move() : Vector3f{
         var transformLocation = Vector3f(0f,0f,0f)
-        when (true){
-            north -> transformLocation.add(0f,0f,0.5f)
-            east -> transformLocation.add(0.5f,0f,0f)
-            south -> transformLocation.add(0f,0f,-0.5f)
-            west -> transformLocation.add(-0.5f,0f,0f)
-        }
+
+        if (north) transformLocation.add(0f,0f,0.5f)
+        if (east)  transformLocation.add(0.5f,0f,0f)
+        if (south) transformLocation.add(0f,0f,-0.5f)
+        if (west)  transformLocation.add(-0.5f,0f,0f)
+
         return transformLocation
     }
 

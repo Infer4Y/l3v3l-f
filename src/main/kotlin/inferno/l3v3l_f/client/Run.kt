@@ -24,7 +24,7 @@ object Run {
     }
 
     fun update(){
-        timer2.schedule(1000/20) {
+        timer2.schedule(1000/100) {
             window.update()
             ticks++
             update()

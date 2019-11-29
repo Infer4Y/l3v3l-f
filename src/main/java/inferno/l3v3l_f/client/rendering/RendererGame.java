@@ -14,7 +14,7 @@ public class RendererGame {
 
 
     public RendererGame(ClientWorld world) {
-        camera = new Camera(180f, 45f, new Vector3f(100,100,100));
+        camera = new Camera(180f, 45f, new Vector3f(-128,-128,-128));
         this.world = world;
     }
 
@@ -45,8 +45,7 @@ public class RendererGame {
                                         current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
                                         last = current;
                                         first = current;
-
-                                    } else {
+                                    } else if(camera.getPos().getX() > cube.getShapes()[f].getVertexes()[g].getX()) {
                                         graphics2D.setColor(Color.white);
                                         current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
                                         graphics2D.drawLine(((int) last.getX()), (int) last.getY(), (int) current.getX(), (int) current.getY());
