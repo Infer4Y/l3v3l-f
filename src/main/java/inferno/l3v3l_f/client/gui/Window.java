@@ -30,6 +30,7 @@ public class Window extends JFrame {
         Vector2f rot = windowHelper.rotate(game.getCamera().getRotationX(), game.getCamera().getRotationY());
         game.getCamera().setRotationX(rot.getX());
         game.getCamera().setRotationY(rot.getY());
+        game.setScale(windowHelper.scale(game.getScale()));
     }
 
     public void draw() {

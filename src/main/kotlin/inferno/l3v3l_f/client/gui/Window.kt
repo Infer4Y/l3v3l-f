@@ -14,6 +14,8 @@ class WindowHelper : KeyListener {
     var down: Boolean = false
     var left: Boolean = false
     var right: Boolean = false
+    var increase: Boolean = false
+    var decrease: Boolean = false
 
     fun move() : Vector3f{
         var transformLocation = Vector3f(0f,0f,0f)
@@ -37,8 +39,18 @@ class WindowHelper : KeyListener {
         return rot
     }
 
+    fun scale(old : Float) : Float{
+        var new : Float = old
+
+        if (increase) new +=0.5f
+        if (decrease) new -=0.5f
+
+        return new
+    }
+
     override fun keyTyped(e: KeyEvent?) {
     }
+
 
     override fun keyPressed(e: KeyEvent?) {
         when (e?.keyCode){
@@ -48,6 +60,10 @@ class WindowHelper : KeyListener {
             KeyEvent.VK_D -> {east=true; west=false}
             KeyEvent.VK_Q -> {left=true; right=false}
             KeyEvent.VK_E -> {right=true; left=false}
+            KeyEvent.VK_SHIFT -> {up=true; down=false}
+            KeyEvent.VK_CONTROL-> {down=true; up=false}
+            KeyEvent.VK_R -> {increase=true; decrease=false}
+            KeyEvent.VK_F -> {decrease=true; increase=false}
         }
     }
 
@@ -59,6 +75,10 @@ class WindowHelper : KeyListener {
             KeyEvent.VK_D -> {east=false}
             KeyEvent.VK_Q -> {left=false}
             KeyEvent.VK_E -> {right=false}
+            KeyEvent.VK_SHIFT -> {up=false}
+            KeyEvent.VK_CONTROL-> {down=false}
+            KeyEvent.VK_R -> {increase=false}
+            KeyEvent.VK_F -> {decrease=false}
         }
     }
 }

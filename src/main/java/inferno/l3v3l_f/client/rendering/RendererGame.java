@@ -11,11 +11,12 @@ import java.awt.*;
 public class RendererGame {
     private ClientWorld world;
     private Camera camera;
-
+    private float scale;
 
     public RendererGame(ClientWorld world) {
         camera = new Camera(270f, -45f, new Vector3f(-128,-128,-128));
         this.world = world;
+        scale = 1.0f;
     }
 
     public void draw(Graphics2D graphics2D) {
@@ -38,7 +39,7 @@ public class RendererGame {
                 for (int k = 0; k < 16; k++) {
                     for (int l = 0; l < 16; l++) {
                         for (int m = 0; m < 16; m++) {
-                            cube = new ModelCube((float)(-256)+((m*16)+(256*i)), (-128)+(l*16), (-256)+((k*16)+(256*j)), 16f);
+                            cube = new ModelCube((-16*scale)+((m*scale)+(16*scale*i)), (-8*scale)+(l*scale), (-256)+((k*scale)+(16*scale*j)), scale);
                             for (int f = 0; f < cube.getShapes().length; f++){
                                 for (int g= 0; g < cube.getShapes()[f].getVertexes().length; g++){
                                     if (first == na) {
@@ -74,5 +75,13 @@ public class RendererGame {
 
     public Camera getCamera() {
         return camera;
+    }
+
+    public float getScale() {
+        return scale;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 }
