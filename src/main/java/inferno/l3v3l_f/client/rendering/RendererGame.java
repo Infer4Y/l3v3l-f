@@ -16,7 +16,7 @@ public class RendererGame {
     public RendererGame(ClientWorld world) {
         camera = new Camera(270f, -45f, new Vector3f(-128,-128,-128));
         this.world = world;
-        scale = 1.0f;
+        scale = 16.0f;
     }
 
     public void draw(Graphics2D graphics2D) {
