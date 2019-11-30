@@ -10,4 +10,8 @@ public class Chunk {
 
         content[x][y][z] = block;
     }
+
+    public Block[][][] getContent() {
+        return content;
+    }
 }
