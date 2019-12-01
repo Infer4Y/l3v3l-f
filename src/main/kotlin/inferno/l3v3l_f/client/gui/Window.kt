@@ -12,6 +12,8 @@ class WindowHelper : KeyListener {
     var west: Boolean = false
     var up: Boolean = false
     var down: Boolean = false
+    var rotUp: Boolean = false
+    var rotDown: Boolean = false
     var left: Boolean = false
     var right: Boolean = false
     var increase: Boolean = false
@@ -35,6 +37,9 @@ class WindowHelper : KeyListener {
 
         if (left) rot.add(-0.05f, 0f)
         if (right) rot.add(0.05f, 0f)
+
+        if (rotUp) rot.add(0f,-0.05f )
+        if (rotDown) rot.add(0f, 0.05f)
 
         return rot
     }
@@ -64,6 +69,8 @@ class WindowHelper : KeyListener {
             KeyEvent.VK_CONTROL-> {down=true; up=false}
             KeyEvent.VK_R -> {increase=true; decrease=false}
             KeyEvent.VK_F -> {decrease=true; increase=false}
+            KeyEvent.VK_PAGE_UP -> {rotUp=true; rotDown=false}
+            KeyEvent.VK_PAGE_DOWN -> {rotDown=true; rotUp=false}
         }
     }
 
@@ -79,6 +86,8 @@ class WindowHelper : KeyListener {
             KeyEvent.VK_CONTROL-> {down=false}
             KeyEvent.VK_R -> {increase=false}
             KeyEvent.VK_F -> {decrease=false}
+            KeyEvent.VK_PAGE_UP -> {rotUp=false}
+            KeyEvent.VK_PAGE_DOWN -> {rotDown=false}
         }
     }
 }

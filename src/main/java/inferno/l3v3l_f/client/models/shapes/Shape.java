@@ -10,6 +10,10 @@ public class Shape {
         this.vertexes = vertexes;
     }
 
+    public boolean intersects(){
+        return false;
+    }
+
     public Vector3f[] getVertexes() {
         return vertexes;
     }

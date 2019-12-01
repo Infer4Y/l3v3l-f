@@ -46,7 +46,7 @@ public class ClientWorld extends World {
     }
 
     private static Block getBlock(){
-        if (Game.r.nextInt(64) >= 1) return Game.air;
+        if (Game.r.nextInt(32) >= 1) return Game.air;
         return Game.stone;
     }
 
