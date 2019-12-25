@@ -65,12 +65,12 @@ class WindowHelper : KeyListener {
             KeyEvent.VK_D -> {east=true; west=false}
             KeyEvent.VK_Q -> {left=true; right=false}
             KeyEvent.VK_E -> {right=true; left=false}
-            KeyEvent.VK_SHIFT -> {up=true; down=false}
-            KeyEvent.VK_CONTROL-> {down=true; up=false}
+            //KeyEvent.VK_SHIFT -> {up=true; down=false}
+            //KeyEvent.VK_CONTROL-> {down=true; up=false}
             KeyEvent.VK_R -> {increase=true; decrease=false}
             KeyEvent.VK_F -> {decrease=true; increase=false}
-            KeyEvent.VK_PAGE_UP -> {rotUp=true; rotDown=false}
-            KeyEvent.VK_PAGE_DOWN -> {rotDown=true; rotUp=false}
+            KeyEvent.VK_CONTROL -> {rotUp=true; rotDown=false}
+            KeyEvent.VK_SHIFT -> {rotDown=true; rotUp=false}
         }
     }
 
@@ -82,12 +82,12 @@ class WindowHelper : KeyListener {
             KeyEvent.VK_D -> {east=false}
             KeyEvent.VK_Q -> {left=false}
             KeyEvent.VK_E -> {right=false}
-            KeyEvent.VK_SHIFT -> {up=false}
-            KeyEvent.VK_CONTROL-> {down=false}
+            //KeyEvent.VK_SHIFT -> {up=false}
+            //KeyEvent.VK_CONTROL-> {down=false}
             KeyEvent.VK_R -> {increase=false}
             KeyEvent.VK_F -> {decrease=false}
-            KeyEvent.VK_PAGE_UP -> {rotUp=false}
-            KeyEvent.VK_PAGE_DOWN -> {rotDown=false}
+            KeyEvent.VK_CONTROL -> {rotUp=false}
+            KeyEvent.VK_SHIFT -> {rotDown=false}
         }
     }
 }

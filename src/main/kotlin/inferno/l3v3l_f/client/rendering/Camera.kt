@@ -38,6 +38,15 @@ class Camera ( var rotationX: Float = 0f, var rotationY: Float = 0f, var pos: Ve
         cameraTransform = cameraRotX.multiply(cameraRotY)
     }
 
+    fun check(vector3f: Vector3f) : Boolean{
+        val x = cameraTransform.transform(vector3f)
+        if (-(x.x) in pos.x-320f..pos.x+320f && (x.z) in pos.z-320f..pos.z+320f ){
+            return true
+        }
+
+        return false
+    }
+
     fun trasformPoint(vector3f: Vector3f) : Vector3f{
         val temp = Vector3f(vector3f.x, vector3f.y, vector3f.z)
         return cameraTransform.transform(temp.add(pos))

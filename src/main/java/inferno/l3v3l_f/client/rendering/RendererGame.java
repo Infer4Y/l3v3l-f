@@ -47,25 +47,27 @@ public class RendererGame {
                                             (-16*scale)+((k*scale)+(16*scale*i)),
                                             (-16*scale)+((m*scale)+(16*scale*n)),
                                             scale);
-                                    for (int f = 0; f < cube.getShapes().length; f++) {
-                                        for (int g = 0; g < cube.getShapes()[f].getVertexes().length; g++) {
-                                            if (first == na) {
-                                                current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
-                                                last = current;
-                                                first = current;
-                                            } else {
-                                                graphics2D.setColor(Color.GREEN);
-                                                current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
-                                                if ((current.getX() <= ((Run.window.getWidth() / 2f) + 20f) && current.getX() >= (-(Run.window.getWidth() / 2f) - 20f)) &&
-                                                        (current.getY() <= ((Run.window.getHeight() / 2f) + 20f) && current.getY() >= (-(Run.window.getHeight() / 2f) - 20f))) {
-                                                    graphics2D.drawLine(((int) last.getX()), (int) last.getY(), (int) current.getX(), (int) current.getY());
-                                                    graphics2D.setColor(Color.BLACK);
+                                    if (camera.check(new Vector3f((-16*scale)+((l*scale)+(16*scale*j)), (-16*scale)+((k*scale)+(16*scale*i)), (-16*scale)+((m*scale)+(16*scale*n))))) {
+                                        for (int f = 0; f < cube.getShapes().length; f++) {
+                                            for (int g = 0; g < cube.getShapes()[f].getVertexes().length; g++) {
+                                                if (first == na) {
+                                                    current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
+                                                    last = current;
+                                                    first = current;
+                                                } else {
+                                                    graphics2D.setColor(Color.GREEN);
+                                                    current = camera.trasformPoint(cube.getShapes()[f].getVertexes()[g]);
+                                                    if ((current.getX() <= ((Run.window.getWidth() / 2f) + 20f) && current.getX() >= (-(Run.window.getWidth() / 2f) - 20f)) &&
+                                                            (current.getY() <= ((Run.window.getHeight() / 2f) + 20f) && current.getY() >= (-(Run.window.getHeight() / 2f) - 20f))) {
+                                                        graphics2D.drawLine(((int) last.getX()), (int) last.getY(), (int) current.getX(), (int) current.getY());
+                                                        graphics2D.setColor(Color.BLACK);
+                                                    }
+                                                    last = current;
                                                 }
-                                                last = current;
                                             }
+                                            last = na;
+                                            first = na;
                                         }
-                                        last = na;
-                                        first = na;
                                     }
                                 }
                             }
